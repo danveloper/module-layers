@@ -3,7 +3,7 @@ Module Layers
 
 Introduction
 ----
-The code presented in this project is the subject of the Sep '12 edition of my [Groovy Magazine(http://groovymag.com)] article on employing message driven architecture patterns in a Grails application using Spring Integration. This project represented the second installment of the article, which discusses introducing modularized business rules into the application workflow.
+The code presented in this project is the subject of the Sep '12 edition of my Groovy Magazine(http://groovymag.com) article on employing message driven architecture patterns in a Grails application using Spring Integration. This project represented the second installment of the article, which discusses introducing modularized business rules into the application workflow.
 
 Technology
 ----
