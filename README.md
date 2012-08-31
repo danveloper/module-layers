@@ -29,4 +29,4 @@ Free for all. Hat-tip if referenced is always appreciated.
 
 Contact
 ----
-g: daniel.p.woods@gmail.com ; t: [@danveloper(http://twitter.com/danveloper)]
+g: daniel.p.woods@gmail.com ; t: <a href="http://twitter.com/danveloper">@danveloper</a>
