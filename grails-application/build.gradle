@@ -1,0 +1,48 @@
+import org.grails.gradle.plugin.GrailsTask
+
+buildscript {
+        repositories {
+            mavenCentral()
+            mavenRepo name: "grails", url: 'http://repo.grails.org/grails/repo' 
+        }
+        dependencies {
+            classpath "org.grails:grails-gradle-plugin:1.1.1-SNAPSHOT"
+        }
+}
+repositories {
+    mavenCentral()
+    mavenRepo name: "grails", url: 'http://repo.grails.org/grails/repo'
+	mavenRepo name: "spring", url: 'http://maven.springframework.org/release'
+}
+version = "1.0"
+grailsVersion = "2.1.0"
+groovyVersion = "1.8.7"
+
+apply plugin: "grails"
+dependencies {
+    ['dependencies', 'resources', 'core', 'hibernate', 'plugin-datasource', 'plugin-domain-class', 'plugin-tomcat', 'plugin-services'].each { plugin ->
+        compile "org.grails:grails-$plugin:$grailsVersion"
+    }
+    bootstrap "org.codehaus.groovy:groovy-all:$groovyVersion"
+
+	compile 'org.springframework.integration:spring-integration-core:2.1.0.RELEASE'
+
+    // Include AcmeCo's Business rules
+    if (System.properties["company.instance"] == "acmeco") {
+        println "Using AcmeCo's business rules for this instance!"
+	    compile project(':acme-co-business-rules')
+    }
+
+    // Include DanCo's Business rules
+    if (System.properties["company.instance"] == "danco") {
+        println "Using DanCo's business rules for this instance!"
+        compile project(':danco-awesome-service-business-rules')
+    }
+}
+
+GRAILS_TASK_PREFIX = "grails-"
+if (name.startsWith(GRAILS_TASK_PREFIX)) {
+    project.task(name, type: GrailsTask) {
+        command "${name - GRAILS_TASK_PREFIX}"
+    }
+}

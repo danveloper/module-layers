@@ -1,0 +1,19 @@
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
+        ">
+
+    <!-- By default, our grails application will plan to include the business-rules.xml configuration from the classpath -->
+    <beans:bean id="registrantRules" class="com.acmeco.rules.registrant.AcmeCoRegistrantRules"/>
+
+    <!-- The RegistrantWorkflow will already exist since it will
+         have been setup by the Grails application prior to this point.
+         We can just hook our business rules directly into the workflow from here! -->
+    <chain input-channel="registrant-workflow">
+        <!-- Hook in AcmeCo's registrant rules into the RegistrantWorkflow -->
+        <service-activator method="overEighteenRule" ref="registrantRules"/>
+        <service-activator method="springRodChecker" ref="registrantRules"/>
+    </chain>
+</beans:beans>
